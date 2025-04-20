@@ -11,7 +11,7 @@ const options = {
     },
     servers: [
       {
-        url: 'http://localhost:10000/api/v1',
+        url: 'https://backend-3y50.onrender.com/api/v1',
       },
     ],
     components: {
