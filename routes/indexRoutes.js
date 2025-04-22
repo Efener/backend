@@ -128,6 +128,8 @@ const billingController = require('../controllers/billingController');
  *                 type: number
  *               year:
  *                 type: number
+ *               amount:
+ *                 type: number
  *     responses:
  *       200:
  *         description: Fatura başarıyla ödendi.

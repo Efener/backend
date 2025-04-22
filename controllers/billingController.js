@@ -110,7 +110,7 @@ const queryBillDetailed = async (req, res) => {
 
 const payBill = async (req, res) => {
   try {
-    const { subscriberNo, month, year } = req.body;
+    const { subscriberNo, month, year, amount } = req.body;
     const bill = await Billing.findOne({ subscriberNo, month, year });
 
     if (!bill) {
@@ -121,10 +121,18 @@ const payBill = async (req, res) => {
       return res.status(400).json({ message: 'Bill already paid' });
     }
 
-    bill.isPaid = true;
-    await bill.save();
-
-    res.status(200).json({ message: 'Bill paid' });
+    if (amount < bill.totalAmount) {
+      bill.totalAmount -= amount;
+      await bill.save();
+      return res.status(200).json({ message: 'Partial payment made', remainingAmount: bill.totalAmount });
+    }
+    else
+    {
+      bill.isPaid = true;
+      await bill.save();
+  
+      res.status(200).json({ message: 'Bill paid' });
+    }
   } catch (error) {
     console.error('Error paying bill:', error);
     res.status(500).json({ message: 'Error' });
