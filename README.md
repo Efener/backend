@@ -3,3 +3,6 @@ Kullanılan teknolojiler:
 Node.js
 Express
 JWT
+
+
+Er diagram dosyaların içinde ER.png olarak bulunmaktadır.
